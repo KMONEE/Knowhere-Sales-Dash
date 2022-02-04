@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 #st.image(levana)
 
 st.markdown("""
-# Levana RandomEarth Sales Tracking
+# Levana Knowhere Sales Tracking
 """)
 
 
