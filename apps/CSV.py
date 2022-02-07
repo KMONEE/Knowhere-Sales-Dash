@@ -80,7 +80,7 @@ def app():
     group_master = ['BLOCK_TIMESTAMP', 'NFT_TYPE', 'RARITY']
     merge_cols = ['BLOCK_TIMESTAMP', 'NFT_TYPE', 'RARITY', 'NFT_LUNA_PRICE', 'NFT_UST_PRICE_AT_PURCHASE']
 
-    master_2 = master_1[merge_cols]
+    master_2 = master_1[merge_cols].copy()
     master_2['BLOCK_TIMESTAMP'] = pd.to_datetime(master_2['BLOCK_TIMESTAMP'])
     master_2.set_index('BLOCK_TIMESTAMP', inplace = True)
     master_2.index = master_2.index.round('D')
