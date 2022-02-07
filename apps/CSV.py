@@ -83,7 +83,7 @@ def app():
     master_2 = master_1[merge_cols].copy()
     master_2['BLOCK_TIMESTAMP'] = pd.to_datetime(master_2['BLOCK_TIMESTAMP'])
     master_2.set_index('BLOCK_TIMESTAMP', inplace = True)
-    master_2.index = master_2.index.round('D')
+    master_2.index = master_2.index.floor('D')
 
     total_df = master_2.groupby(group_master).sum().rename(columns={'NFT_LUNA_PRICE':'TOTAL_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'TOTAL_UST'})
     average_df = master_2.groupby(group_master).mean().rename(columns={'NFT_LUNA_PRICE':'AVERAGE_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'AVERAGE_UST'})
