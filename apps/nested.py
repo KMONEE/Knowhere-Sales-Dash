@@ -40,7 +40,7 @@ def app():
     nested_egg_RARITY_merge = nested_egg_RARITY_merge[merge_cols]
     nested_egg_RARITY_merge['BLOCK_TIMESTAMP'] = pd.to_datetime(nested_egg_RARITY_merge['BLOCK_TIMESTAMP'])
     nested_egg_RARITY_merge.set_index('BLOCK_TIMESTAMP', inplace = True)
-    nested_egg_RARITY_merge.index = nested_egg_RARITY_merge.index.round('D')
+    nested_egg_RARITY_merge.index = nested_egg_RARITY_merge.index.floor('D')
 
     total_df = nested_egg_RARITY_merge.groupby(group_master).sum().rename(columns={'NFT_LUNA_PRICE':'TOTAL_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'TOTAL_UST'})
     average_df = nested_egg_RARITY_merge.groupby(group_master).mean().rename(columns={'NFT_LUNA_PRICE':'AVERAGE_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'AVERAGE_UST'})

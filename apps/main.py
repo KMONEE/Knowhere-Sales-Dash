@@ -48,7 +48,7 @@ def app():
     nft_luna_price_df = pd.concat(nft_luna_price_df)
     nft_luna_price_df['BLOCK_TIMESTAMP'] = pd.to_datetime(nft_luna_price_df['BLOCK_TIMESTAMP'])
     nft_luna_price_df.set_index('BLOCK_TIMESTAMP', inplace = True)
-    nft_luna_price_df.index = nft_luna_price_df.index.round('D')
+    nft_luna_price_df.index = nft_luna_price_df.index.floor('D')
     #nft_luna_price_df
 
 

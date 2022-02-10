@@ -37,7 +37,7 @@ def app():
     dust_rarity_merge = dust_rarity_merge[merge_cols]
     dust_rarity_merge['BLOCK_TIMESTAMP'] = pd.to_datetime(dust_rarity_merge['BLOCK_TIMESTAMP'])
     dust_rarity_merge.set_index('BLOCK_TIMESTAMP', inplace = True)
-    dust_rarity_merge.index = dust_rarity_merge.index.round('D')
+    dust_rarity_merge.index = dust_rarity_merge.index.floor('D')
 
     total_df = dust_rarity_merge.groupby(group_master).sum().rename(columns={'NFT_LUNA_PRICE':'TOTAL_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'TOTAL_UST'})
     average_df = dust_rarity_merge.groupby(group_master).mean().rename(columns={'NFT_LUNA_PRICE':'AVERAGE_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'AVERAGE_UST'})

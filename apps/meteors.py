@@ -37,7 +37,7 @@ def app():
     meteors_rarity_merge = meteors_rarity_merge[merge_cols]
     meteors_rarity_merge['BLOCK_TIMESTAMP'] = pd.to_datetime(meteors_rarity_merge['BLOCK_TIMESTAMP'])
     meteors_rarity_merge.set_index('BLOCK_TIMESTAMP', inplace = True)
-    meteors_rarity_merge.index = meteors_rarity_merge.index.round('D')
+    meteors_rarity_merge.index = meteors_rarity_merge.index.floor('D')
 
     total_df = meteors_rarity_merge.groupby(group_master).sum().rename(columns={'NFT_LUNA_PRICE':'TOTAL_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'TOTAL_UST'})
     average_df = meteors_rarity_merge.groupby(group_master).mean().rename(columns={'NFT_LUNA_PRICE':'AVERAGE_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'AVERAGE_UST'})

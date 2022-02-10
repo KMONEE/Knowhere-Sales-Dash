@@ -37,7 +37,7 @@ def app():
     eggs_rarity_merge = eggs_rarity_merge[merge_cols]
     eggs_rarity_merge['BLOCK_TIMESTAMP'] = pd.to_datetime(eggs_rarity_merge['BLOCK_TIMESTAMP'])
     eggs_rarity_merge.set_index('BLOCK_TIMESTAMP', inplace = True)
-    eggs_rarity_merge.index = eggs_rarity_merge.index.round('D')
+    eggs_rarity_merge.index = eggs_rarity_merge.index.floor('D')
 
     total_df = eggs_rarity_merge.groupby(group_master).sum().rename(columns={'NFT_LUNA_PRICE':'TOTAL_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'TOTAL_UST'})
     average_df = eggs_rarity_merge.groupby(group_master).mean().rename(columns={'NFT_LUNA_PRICE':'AVERAGE_LUNA', 'NFT_UST_PRICE_AT_PURCHASE':'AVERAGE_UST'})
