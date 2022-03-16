@@ -34,6 +34,10 @@ def app():
     dust_rarity = pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/f4b78c34-07ec-4f5e-8099-7e6db2db24a9/data/latest')
     dust_rarity_merge = pd.merge(dust, dust_rarity[['TOKEN_ID', 'RARITY']], on='TOKEN_ID')
 
+    dust_rarity_merge['NFT_LUNA_PRICE'] = pd.to_numeric(dust_rarity_merge['NFT_LUNA_PRICE'])
+    dust_rarity_merge = dust_rarity_merge.sort_values(['TX_ID','NFT_LUNA_PRICE']).reset_index()
+    dust_rarity_merge = dust_rarity_merge.drop_duplicates(subset='TX_ID', keep='last')
+
     dust_rarity_merge = dust_rarity_merge[merge_cols]
     dust_rarity_merge['BLOCK_TIMESTAMP'] = pd.to_datetime(dust_rarity_merge['BLOCK_TIMESTAMP'])
     dust_rarity_merge.set_index('BLOCK_TIMESTAMP', inplace = True)
